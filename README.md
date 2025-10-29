@@ -46,13 +46,6 @@ agendamento-pet/
 ├─ icons.css      # Ícones via CSS (classes .icon)
 └─ script.js      # Lógica de agenda, date/time pickers e formulário
 ```
-
-Sugestão: adicione capturas de tela em `docs/` e referencie-as neste README:
-```md
-![Tela principal](docs/screenshot-01.png)
-![Modal de agendamento](docs/screenshot-02.png)
-```
-
 ---
 
 ## 📚 Como usar

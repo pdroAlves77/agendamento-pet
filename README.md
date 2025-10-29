@@ -32,7 +32,7 @@ Aplicação web em HTML/CSS/JS para agenda de pet shop: visualize a agenda do di
 
 - HTML5
 - CSS3 (`style.css` e `icons.css`)
-- JavaScript Vanilla (`script.js`)
+- JavaScript (`script.js`)
 - Google Fonts (Inter)
 
 ---

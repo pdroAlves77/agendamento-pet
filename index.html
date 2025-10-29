@@ -1,150 +1,116 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Agenda - Mundo Pet (vertical)</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mundo Pet — Agenda</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="page-wrap">
-    <!-- Centered phone-like column (vertical layout) -->
-    <div class="phone-shell" aria-live="polite">
-      <div class="phone-top">
-        <div class="brand-chip">
-          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2l2 4 4 .5-3 3 .8 4.1L12 13l-3.8 1.6L9 9 6 6.5 10 6z" fill="currentColor"/></svg>
-          <span>MUNDO PET</span>
-        </div>
+  <div class="page-bg"></div>
 
-        <div class="heading">
-          <h1>Sua agenda</h1>
-          <p class="lead">Aqui você pode ver todos os clientes e serviços agendados para hoje.</p>
-        </div>
+  <div class="container">
+    <div class="brand-chip" aria-label="Logo">MUNDO PET</div>
 
-        <div class="control-row">
-          <label for="agenda-date" class="sr-only">Data</label>
-          <div class="date-select">
-            <input id="agenda-date" type="date" />
-            <button id="new-appointment" class="btn primary" type="button">Novo agendamento</button>
-          </div>
-        </div>
+    <header class="page-head">
+      <div class="head-left">
+        <h1 class="title">Sua agenda</h1>
+        <p class="subtitle">Aqui você pode ver todos os clientes e serviços agendados para hoje.</p>
       </div>
 
-      <main class="sections-vertical">
-        <section class="section-card" data-section="manha" aria-labelledby="manha-title">
-          <div class="section-header">
-            <div class="left">
-              <div class="section-icon" aria-hidden="true">
-                <!-- icon -->
-                <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4"></path></svg>
-              </div>
-              <div>
-                <div id="manha-title" class="section-name">Manhã</div>
-                <div class="section-hours">09h-12h</div>
-              </div>
-            </div>
-          </div>
+      <div class="head-right">
+        <div class="date-wrap" id="topDateWrap">
+          <button class="date-pill" id="datePill" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="datePicker">
+            <span class="icon calendar" aria-hidden="true"></span>
+            <span id="selectedDateText">10/01/2024</span>
+            <span class="icon chevron" aria-hidden="true"></span>
+          </button>
+          <div id="datePicker" class="datepicker" role="dialog" aria-modal="false" aria-label="Escolher data"></div>
+        </div>
+      </div>
+    </header>
 
-          <div class="appointments-list" id="list-manha"></div>
-        </section>
+    <section id="periods" class="periods" aria-label="Períodos da agenda"></section>
 
-        <section class="section-card" data-section="tarde" aria-labelledby="tarde-title">
-          <div class="section-header">
-            <div class="left">
-              <div class="section-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 12h1M20 12h1M12 3v1M12 20v1"></path></svg>
-              </div>
-              <div>
-                <div id="tarde-title" class="section-name">Tarde</div>
-                <div class="section-hours">13h-18h</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="appointments-list" id="list-tarde"></div>
-        </section>
-
-        <section class="section-card" data-section="noite" aria-labelledby="noite-title">
-          <div class="section-header">
-            <div class="left">
-              <div class="section-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 12.79A9 9 0 1 1 11.21 3"></path></svg>
-              </div>
-              <div>
-                <div id="noite-title" class="section-name">Noite</div>
-                <div class="section-hours">19h-23h</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="appointments-list" id="list-noite"></div>
-        </section>
-      </main>
-
-      <footer class="phone-footer small">
-        <span class="muted">Toque em "Novo agendamento" para adicionar</span>
-      </footer>
-    </div>
+    <button class="fab" id="newAppointmentBtn" type="button">NOVO AGENDAMENTO</button>
   </div>
 
-  <!-- Modal (semantic dialog) -->
-  <dialog id="modal-dialog" aria-labelledby="modal-title">
-    <div class="dialog-shell">
-      <header class="modal-header">
-        <h2 id="modal-title">Agende um atendimento</h2>
-        <button id="modal-close" class="btn-icon" type="button" aria-label="Fechar modal">&times;</button>
-      </header>
+  <!-- Modal de novo agendamento -->
+  <div class="modal" id="appointmentModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" data-close="true"></div>
 
-      <form id="appointment-form" novalidate>
-        <div class="form-row">
-          <label for="tutor">Nome do tutor <span class="required">*</span></label>
-          <input id="tutor" name="tutor" type="text" autocomplete="name" />
-          <div class="error" data-for="tutor"></div>
-        </div>
+    <div class="modal-dialog" role="document">
+      <form id="appointmentForm" novalidate>
+        <header class="modal-head">
+          <h2 id="modalTitle">Agende um atendimento</h2>
+          <button class="modal-close" type="button" aria-label="Fechar" data-close="true">×</button>
+        </header>
 
-        <div class="form-row">
-          <label for="pet">Nome do pet <span class="required">*</span></label>
-          <input id="pet" name="pet" type="text" />
-          <div class="error" data-for="pet"></div>
-        </div>
-
-        <div class="form-row">
-          <label for="phone">Telefone <span class="required">*</span></label>
-          <input id="phone" name="phone" type="tel" placeholder="(99) 99999-9999" />
-          <div class="error" data-for="phone"></div>
-        </div>
-
-        <div class="form-row">
-          <label for="service">Descrição do serviço <span class="required">*</span></label>
-          <textarea id="service" name="service" rows="2"></textarea>
-          <div class="error" data-for="service"></div>
-        </div>
-
-        <div class="form-row inline">
-          <div>
-            <label for="date">Data <span class="required">*</span></label>
-            <input id="date" name="date" type="date" />
-            <div class="error" data-for="date"></div>
+        <div class="form-grid">
+          <div class="field">
+            <label for="tutorName">Nome do tutor</label>
+            <input id="tutorName" name="tutorName" type="text" required />
+            <small class="error" data-error-for="tutorName"></small>
           </div>
 
-          <div>
-            <label for="time">Hora <span class="required">*</span></label>
-            <input id="time" name="time" type="time" />
-            <div class="error" data-for="time"></div>
+          <div class="field">
+            <label for="petName">Nome do pet</label>
+            <input id="petName" name="petName" type="text" required />
+            <small class="error" data-error-for="petName"></small>
+          </div>
+
+          <div class="field">
+            <label for="phone">Telefone</label>
+            <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="(11) 91234-5678" required />
+            <small class="error" data-error-for="phone"></small>
+          </div>
+
+          <div class="field field--full">
+            <label for="service">Descrição do serviço</label>
+            <textarea id="service" name="service" rows="2" required></textarea>
+            <small class="error" data-error-for="service"></small>
+          </div>
+
+          <!-- Data com mini calendário -->
+          <div class="field">
+            <label>Data</label>
+            <div class="date-field" id="modalDateWrap">
+              <button type="button" class="date-pill small" id="modalDateBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="modalDatePicker">
+                <span class="icon calendar" aria-hidden="true"></span>
+                <span id="modalDateText">dd/mm/aaaa</span>
+                <span class="icon chevron" aria-hidden="true"></span>
+              </button>
+              <div id="modalDatePicker" class="datepicker" role="dialog" aria-modal="false" aria-label="Escolher data para o agendamento"></div>
+              <input id="formDate" name="date" type="hidden" required />
+            </div>
+            <small class="error" data-error-for="date"></small>
+          </div>
+
+          <!-- Hora com mini timepicker (igual ao date) -->
+          <div class="field">
+            <label>Hora</label>
+            <div class="time-field" id="modalTimeWrap">
+              <button type="button" class="date-pill small" id="modalTimeBtn" aria-haspopup="listbox" aria-expanded="false" aria-controls="modalTimePicker">
+                <span class="icon clock" aria-hidden="true"></span>
+                <span id="modalTimeText">--:--</span>
+                <span class="icon chevron" aria-hidden="true"></span>
+              </button>
+              <div id="modalTimePicker" class="timepicker" role="listbox" aria-label="Escolher horário"></div>
+              <input id="formTime" name="time" type="hidden" required />
+            </div>
+            <small class="error" data-error-for="time"></small>
           </div>
         </div>
 
-        <div class="form-actions">
-          <button type="button" id="cancel" class="btn">Cancelar</button>
-          <button type="submit" id="save" class="btn primary">Agendar</button>
-        </div>
-
-        <p class="note">Horários válidos: Manhã 06:00–11:59 | Tarde 12:00–17:59 | Noite 18:00–23:59</p>
+        <footer class="modal-foot">
+          <button class="btn ghost" type="button" data-close="true">Cancelar</button>
+          <button class="btn primary" type="submit">Agendar</button>
+        </footer>
       </form>
     </div>
-  </dialog>
-
-  <div class="page-accent-stripe" aria-hidden="true"></div>
+  </div>
 
   <script src="script.js"></script>
 </body>

@@ -3,16 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mundo Pet — Agenda</title>
+  <title>MUNDO PET - AGENDA</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="icons.css" />
 </head>
 <body>
-  <div class="page-bg"></div>
-
   <div class="container">
-    <div class="brand-chip" aria-label="Logo">MUNDO PET</div>
+    <div class="brand-chip" aria-label="Logo">
+      <span class="brand-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9.5 5.8C8.9 4.7 7.7 4 6.5 4 5 4 3.8 5.2 3.8 6.7 3.8 8.1 4.9 9.2 6.3 9.2"/>
+            <path d="M14.5 5.8C15.1 4.7 16.3 4 17.5 4 19 4 20.2 5.2 20.2 6.7c0 1.4-1.1 2.5-2.5 2.5"/>
+            <path d="M6 9.3h12a4.6 4.6 0 0 1 4.6 4.6v0A6.6 6.6 0 0 1 16 20.5H8A6.6 6.6 0 0 1 1.4 13.9v0A4.6 4.6 0 0 1 6 9.3Z"/>
+            <circle cx="9.4" cy="12.6" r="1.05"/>
+            <circle cx="14.6" cy="12.6" r="1.05"/>
+            <path d="M10.2 15.2c0-1.2 1.3-2 2.8-2s2.8.8 2.8 2-1.3 2-2.8 2-2.8-.8-2.8-2Z"/>
+            <path d="M12 15.2v.35"/>
+          </g>
+        </svg>
+      </span>
+      <span class="brand-text">MUNDO PET</span>
+    </div>
 
     <header class="page-head">
       <div class="head-left">
@@ -37,7 +51,7 @@
     <button class="fab" id="newAppointmentBtn" type="button">NOVO AGENDAMENTO</button>
   </div>
 
-  <!-- Modal de novo agendamento -->
+  <!-- Modal -->
   <div class="modal" id="appointmentModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-backdrop" data-close="true"></div>
 
@@ -73,7 +87,6 @@
             <small class="error" data-error-for="service"></small>
           </div>
 
-          <!-- Data com mini calendário -->
           <div class="field">
             <label>Data</label>
             <div class="date-field" id="modalDateWrap">
@@ -88,7 +101,6 @@
             <small class="error" data-error-for="date"></small>
           </div>
 
-          <!-- Hora com mini timepicker (igual ao date) -->
           <div class="field">
             <label>Hora</label>
             <div class="time-field" id="modalTimeWrap">

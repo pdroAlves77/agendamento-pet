@@ -1,0 +1,62 @@
+/* Ícones base e dos períodos (manhã azul, tarde bicolor amarelo/laranja, noite lua) + lixeira + check */
+
+.icon{
+  width: 18px; height: 18px; display: inline-block;
+  background-size: 18px 18px; background-repeat: no-repeat; background-position: center;
+}
+
+.icon.calendar{
+  background-image: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><rect x="3" y="5" width="18" height="16" rx="3" stroke="%23a6a8b3" stroke-width="1.8"/><path d="M8 3v4M16 3v4M3 9h18" stroke="%23a6a8b3" stroke-width="1.8" stroke-linecap="round"/></svg>');
+}
+.icon.clock{
+  background-image: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><circle cx="12" cy="12" r="8.2" stroke="%23a6a8b3" stroke-width="1.8"/><path d="M12 7.6V12l3.2 2" stroke="%23a6a8b3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+}
+.icon.chevron{
+  background-image: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M6.8 9.5L12 14.7l5.2-5.2" stroke="%23a6a8b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+}
+
+/* Lixeira no botão Remover */
+.remove{ display: inline-flex; align-items: center; gap: 8px; }
+.remove::before{
+  content: ""; width: 16px; height: 16px; flex: 0 0 16px;
+  background-size: 16px 16px; background-repeat: no-repeat; background-position: center;
+  opacity: .9; transition: opacity .2s ease;
+  background-image: url('data:image/svg+xml;utf8,<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M4 7h16" stroke="%23b9bbca" stroke-width="1.8" stroke-linecap="round"/><path d="M7 7l1 13a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2l1-13" stroke="%23b9bbca" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 7V5.6A1.6 1.6 0 0 1 10.6 4h2.8A1.6 1.6 0 0 1 15 5.6V7" stroke="%23b9bbca" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+}
+.remove:hover::before{ opacity: 1; }
+
+/* Ícones dos períodos */
+.period-left{ position: relative; padding-left: 26px; }
+.period-left .bullet{ display: none; }
+
+.period--morning .period-left::before,
+.period--afternoon .period-left::before,
+.period--night .period-left::before{
+  content: "";
+  position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 18px; height: 18px; background-size: 18px 18px; background-repeat: no-repeat; opacity: .98;
+}
+
+/* Manhã — sol azul */
+.period--morning .period-left::before{
+  background-image: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4" fill="%234aa8ff"/><g stroke="%234aa8ff" stroke-width="1.8" stroke-linecap="round"><path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/><path d="M4.9 4.9l2.1 2.1"/><path d="M17 17l2.1 2.1"/><path d="M4.9 19.1l2.1-2.1"/><path d="M17 7l2.1-2.1"/></g></svg>');
+}
+
+/* Tarde — sol bicolor (amarelo/laranja) */
+.period--afternoon .period-left::before{
+  background-image: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="%23ffc61a"/><stop offset="0.5" stop-color="%23ffc61a"/><stop offset="0.5" stop-color="%23ff8a00"/><stop offset="1" stop-color="%23ff8a00"/></linearGradient></defs><circle cx="12" cy="12" r="5.8" fill="url(%23g1)"/><g stroke="%23ff9c00" stroke-width="1.8" stroke-linecap="round"><path d="M12 1.8v3.2"/><path d="M12 19v3.2"/><path d="M1.8 12h3.2"/><path d="M19 12h3.2"/><path d="M5 5l2.3 2.3"/><path d="M16.7 16.7L19 19"/><path d="M5 19l2.3-2.3"/><path d="M16.7 7.3L19 5"/></g></svg>');
+}
+
+/* Noite — lua */
+.period--night .period-left::before{
+  background-image: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.8A8.6 8.6 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" fill="%23ffd34d"/></svg>');
+}
+
+/* Check no botão Agendar */
+.modal .btn.primary{ display: inline-flex; align-items: center; gap: 8px; }
+.modal .btn.primary::before{
+  content: ""; width: 16px; height: 16px; flex: 0 0 16px;
+  background-size: 16px 16px; background-repeat: no-repeat; background-position: center;
+  filter: brightness(0) invert(1);
+  background-image: url('data:image/svg+xml;utf8,<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M20 7L9 18l-5-5" stroke="%23ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+}
